@@ -1,4 +1,5 @@
-FROM pitstop-dotnet-sdk-base:1.0 AS build-env
+# FROM pitstop-dotnet-sdk-base:1.0 AS build-env
+FROM bitnami/dotnet-sdk:6.0.417 AS build-env
 WORKDIR /app
 
 # Copy necessary files and restore as distinct layer
