@@ -1,10 +1,10 @@
 # FROM pitstop-dotnet-sdk-base:1.0 AS build-env
-FROM ubuntu/dotnet-aspnet:7.0_edge AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /app
 
 # Copy necessary files and restore as distinct layer
 COPY *.csproj ./
-RUN dotnet clean restore
+RUN dotnet restore
 
 # Copy everything else and build
 COPY . ./
@@ -12,7 +12,7 @@ RUN dotnet publish -c Release -o out
 
 # Build runtime image
 # FROM pitstop-dotnet-runtime-base:1.0
-FROM ubuntu/dotnet-aspnet:7.0_edge
+FROM mcr.microsoft.com/dotnet/sdk:7.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
