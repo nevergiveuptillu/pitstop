@@ -1,5 +1,5 @@
 # FROM pitstop-dotnet-sdk-base:1.0 AS build-env
-FROM bitnami/dotnet-sdk:6.0.417 AS build-env
+FROM ubuntu/dotnet-aspnet:7.0_edge AS build-env
 WORKDIR /app
 
 # Copy necessary files and restore as distinct layer
@@ -12,7 +12,7 @@ RUN dotnet publish -c Release -o out
 
 # Build runtime image
 # FROM pitstop-dotnet-runtime-base:1.0
-FROM bitnami/dotnet-sdk:6.0.417
+FROM ubuntu/dotnet-aspnet:7.0_edge
 WORKDIR /app
 COPY --from=build-env /app/out .
 
