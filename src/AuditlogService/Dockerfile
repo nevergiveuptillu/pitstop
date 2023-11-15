@@ -1,3 +1,4 @@
+# FROM pitstop-dotnet-sdk-base:1.0 AS build-env
 FROM bitnami/dotnet-sdk:6.0.417 AS build-env
 WORKDIR /app
 
@@ -10,7 +11,8 @@ COPY . ./
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM pitstop-dotnet-runtime-base:1.0
+# FROM pitstop-dotnet-runtime-base:1.0
+FROM bitnami/dotnet-sdk:6.0.417
 WORKDIR /app
 COPY --from=build-env /app/out .
 
