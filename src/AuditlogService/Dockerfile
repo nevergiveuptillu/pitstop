@@ -4,9 +4,10 @@ WORKDIR /app
 
 # Copy necessary files and restore as distinct layer
 COPY *.csproj ./
-RUN dotnet restore build
+RUN dotnet restore 
 # Copy everything else and build
 COPY . ./
+RUN dotnet build
 RUN dotnet publish -c Release -o out 
 
 # Build runtime image
